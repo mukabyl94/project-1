@@ -1,7 +1,7 @@
 package company.service.impl;
 
-public class MyExcetion extends RuntimeException {
-    public MyExcetion(String message) {
+public class MyException extends RuntimeException {
+    public MyException(String message) {
         super(message);
     }
 }

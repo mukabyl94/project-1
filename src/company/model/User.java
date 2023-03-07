@@ -1,15 +1,17 @@
-package model;
+package company.model;
+
+import company.gender.Gender;
 
 public class User {
     private int id;
     private int age;
     private String name;
-    private String gender;
+    private Gender gender;
 
     public User() {
     }
 
-    public User(int id, int age, String name, String gender) {
+    public User(int id, int age, String name, Gender gender) {
         this.id = id;
         this.age = age;
         this.name = name;
@@ -40,13 +42,6 @@ public class User {
         this.name = name;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
 
     @Override
     public String toString() {

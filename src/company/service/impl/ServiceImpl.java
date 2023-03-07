@@ -4,17 +4,14 @@ import company.dao.UserDao;
 import company.model.User;
 import company.service.UserService;
 
-import java.util.ArrayList;
-import java.util.List;
+public class ServiceImpl implements UserService {
+    private UserDao userDao = new UserDao();
 
-public class UserServiceImpl implements UserService {
-    private UserDao userDao;
-
-    public UserServiceImpl(UserDao userDao) {
+    public ServiceImpl(UserDao userDao) {
         this.userDao = userDao;
     }
 
-    public UserServiceImpl() {
+    public ServiceImpl() {
     }
 
     public UserDao getUserDao() {
@@ -31,41 +28,37 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void getAllUser(List<User> users) {
-        for (User user : users) {
+    public void getAllUser() {
+        for (User user : userDao.getUsers()) {
             System.out.println(user);
         }
     }
 
     @Override
     public User findById(int userId) {
-        ArrayList<Integer> integers = new ArrayList<>();
-        for (User gost: userDao.getUsers()) {
-            integers.add(gost.getId());
-        }
-        for (User gost: userDao.getUsers()) {
-            if (gost.getId() == userId){
-                System.out.println(gost);
-            }else if(!integers.contains(userId)){
-                throw new RuntimeException("Myndai Id jok");
+        for (User user : userDao.getUsers()) {
+            if (user.getId() == userId) {
+                return user;
             }
         }
+        throw new MyException("Kechiresiz bizde " + userId + " Id jok");
     }
 
     @Override
     public void deleteId(int userId) {
-        ArrayList<Integer> integers = new ArrayList<>();
-        for (User gost: userDao.getUsers()) {
-            integers.add(gost.getId());
-        }
-        for (User gost: userDao.getUsers()) {
-            if (gost.getId() == userId){
-                userDao.getUsers().remove(gost);
-            }else if(!integers.contains(userId)){
-                throw new RuntimeException("Myndai Id jok");
+        boolean n = true;
+        for (int i = 0; i < userDao.getUsers().size(); i++) {
+            if (userDao.getUsers().get(i).getId() == userId) {
+                n = false;
+                userDao.getUsers().remove(userDao.getUsers().get(i));
+                System.out.println("Siz bergen Id degi maalymat ochuruldu");
             }
         }
+        if (n) {
+            throw new MyException("Kechiresiz bizde " + userId + " Id jok");
+        }
     }
+
 
     @Override
     public String toString() {

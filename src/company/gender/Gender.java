@@ -1,6 +1,6 @@
-package gender;
+package company.gender;
 
 public enum Gender {
-    WOMAN,
-    MAN;
+    FEMALE,
+    MALE;
 }

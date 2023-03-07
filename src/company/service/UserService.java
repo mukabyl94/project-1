@@ -1,12 +1,12 @@
-package service;
+package company.service;
 
-import model.User;
+import company.model.User;
 
 import java.util.List;
 
 public interface UserService {
     void addUser(User user);
-    void getAllUser(List<User> users);
-    void findId(int userId);
+    User findById(int userId);
     void deleteId(int userId);
+    void getAllUser();
 }
